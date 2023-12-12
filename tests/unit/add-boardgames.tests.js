@@ -3,13 +3,13 @@ const fetch = require('node-fetch');
 
 suite('Add Boardgames page', function() {
   test('Page title', async function() {
-    let res = await fetch("https://suat17s.onrender.com/add-boardgame");
+    let res = await fetch("http://localhost:8888/add-boardgame");
     let body = await res.text();
     assert.ok(body.includes("<h1>Add New Boardgame</h1>"));
   });
 
   test('Boardgame HTML form', async function() {
-    let res = await fetch("https://suat17s.onrender.com/add-boardgame");
+    let res = await fetch("http://localhost:8888/add-boardgame");
     let body = await res.text();
     
     let nameFieldFound = body.includes('<input id="name" type="text" name="name"/>');
@@ -24,7 +24,7 @@ suite('Add Boardgames page', function() {
 
   test('Add valid boardgame', async function() {
     let res = await fetch(
-      "https://suat17s.onrender.com/add-boardgame",
+      "http://localhost:8888/add-boardgame",
       {
         method: 'POST',
         headers: {
@@ -41,7 +41,7 @@ suite('Add Boardgames page', function() {
 
   test('Add invalid boardgame', async function() {
      let res = await fetch(
-      "https://suat17s.onrender.com/add-boardgame",
+      "http://localhost:8888/add-boardgame",
       {
         method: 'POST',
         headers: {
@@ -54,7 +54,7 @@ suite('Add Boardgames page', function() {
     let errMsg = body.includes("Cannot add boardgame. Name and rating fields are required!");
     assert.ok(errMsg, "Add invalid boardgame should display an error message");
 
-    res = await fetch("https://suat17s.onrender.com/");
+    res = await fetch("http://localhost:8888/");
     body = await res.text();
 	assert.ok(body.includes("Added boardgames: <b>3</b>"), 
 		"Add invalid boardgame should not change the boardgames count");
