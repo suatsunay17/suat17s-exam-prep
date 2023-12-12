@@ -2,27 +2,27 @@ name: Softuni Devops
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'npm'
-    - name: Install dependencies
-      run: npm install
-    - name: Run unit tests
-      run: npm run test:unit
-    - name: Display username
-      run: echo "suat17s"
-      
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "npm"
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm run test:unit
+      - name: Display username
+        run: echo "suat17s"
+
   deploy:
     needs: build-test
     runs-on: ubuntu-latest
@@ -43,11 +43,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: 'npm'
+          cache: "npm"
       - name: Install dependencies
         run: npm install
       - name: Install playwright
         run: npx playwright install
       - name: Run UI Tests
         run: npm run test:ui
-    
